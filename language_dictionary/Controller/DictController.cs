@@ -1,4 +1,5 @@
-﻿using System;
+﻿using language_dictionary.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,33 +23,9 @@ namespace language_dictionary.Controller
         public DictController(string fileUrl)
         {
             //Parsing available languages from XML
-            availLangs = parseXML(fileUrl);
+            availLangs = XMLParserLINQ.parseLanguagesFromXML(fileUrl);
            
         }
-
-        //LINQ XML Language parsing
-        private HashSet<Language> parseXML(string fileUrl)
-        {
-            HashSet<Language> langs = new HashSet<Language>();
-
-            XDocument doc = XDocument.Parse(File.ReadAllText(fileUrl));
-
-            var data = from item in doc.Descendants("language")
-                       select new
-                       {
-                           name = item.Element("name").Value.ToString(),
-                           descriptor = item.Element("descriptor").Value.ToString(),
-                       };
-
-            foreach (var item in data)
-            {
-                Language lang = new Language(item.name,item.descriptor);
-                langs.Add(lang);
-            }
-            return langs;
-        }
-
-
-
+        
     }
 }
