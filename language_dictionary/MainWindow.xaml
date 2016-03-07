@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="366.418" Width="551.866" Loaded="Window_Loaded">
     <Grid>
-        <TextBlock x:Name="txtBlockTest" HorizontalAlignment="Left" Margin="10,201,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="102" Width="316"/>
-        <Button x:Name="btnTestLINQ" Content="Test LINQ" HorizontalAlignment="Left" Margin="405,283,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBlock x:Name="txtBlockTest" HorizontalAlignment="Left" Margin="10,290,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="35" Width="298"/>
+        <Button x:Name="btnTestLINQ" Content="Test LINQ" HorizontalAlignment="Left" Margin="405,283,0,0" VerticalAlignment="Top" Width="75" Click="btnTestLINQ_Click"/>
         <ComboBox x:Name="comboBoxFromLang" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top" Width="153"/>
         <ComboBox x:Name="comboBoxToLang" HorizontalAlignment="Left" Margin="381,144,0,0" VerticalAlignment="Top" Width="153"/>
+        <TextBox x:Name="txtBoxWordToTranslate" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblTranslatedWord" Content="" HorizontalAlignment="Left" Margin="381,176,0,0" VerticalAlignment="Top" Width="153" Height="29"/>
+        <Button x:Name="btnTranslate" Content="Translate" HorizontalAlignment="Left" Margin="222,212,0,0" VerticalAlignment="Top" Width="102" Height="49"/>
     </Grid>
 </Window>

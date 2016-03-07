@@ -1,4 +1,5 @@
 ﻿using language_dictionary.Controller;
+using language_dictionary.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,6 +48,22 @@ namespace language_dictionary
             }
             comboBoxFromLang.SelectedIndex = 0;
             comboBoxToLang.SelectedIndex = 1;
+        }
+
+        private void btnTestLINQ_Click(object sender, RoutedEventArgs e)
+        {
+            txtBlockTest.Text = "";
+            string descrTo = "";
+            string descrFrom = "";
+            foreach (Language lang in dictController.getAvailLangs())
+            {
+                if (lang.getName().Equals(comboBoxFromLang.SelectedValue.ToString()))
+                    descrFrom = lang.getDescriptor();
+                if (lang.getName().Equals(comboBoxToLang.SelectedValue.ToString()))
+                    descrTo = lang.getDescriptor();
+            }
+            
+           txtBlockTest.Text = XMLParserLINQ.parseTranslatedWordFromWordAndUrl(txtBoxWordToTranslate.Text, descrFrom, descrTo, ".\\Resources\\data.xml");
         }
 
 
