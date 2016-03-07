@@ -1,5 +1,7 @@
-﻿using System;
+﻿using language_dictionary.Controller;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace language_dictionary
 {
@@ -23,5 +26,29 @@ namespace language_dictionary
         {
             InitializeComponent();
         }
+        DictController dictController;
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            dictController = new DictController(".\\Resources\\data.xml");
+            defaultPopulateToAndFromComboBoxes();
+            
+        }
+
+        private void defaultPopulateToAndFromComboBoxes()
+        {
+            comboBoxFromLang.Items.Clear();
+            comboBoxToLang.Items.Clear();
+            foreach (Language lang in dictController.getAvailLangs())
+            {
+                comboBoxFromLang.Items.Add(lang.getName());
+                comboBoxToLang.Items.Add(lang.getName());
+
+            }
+            comboBoxFromLang.SelectedIndex = 0;
+            comboBoxToLang.SelectedIndex = 1;
+        }
+
+
     }
 }

@@ -8,24 +8,26 @@ namespace language_dictionary
     class Language
     {
         private string name;
-        private string descriptor;
+        private string descriptor { get; set; }
 
         //Constructor
-        Language(string name, string descriptor)
+        public Language(string name, string descriptor)
         {
             this.name = name;
             this.descriptor = descriptor;
         }
 
-        //'Name' getter
+        //name getter
         public string getName()
         {
             return name;
         }
-        //'Descriptor' getter
+
+        //descriptor getter
         public string getDescriptor()
         {
             return descriptor;
         }
+        
     }
 }
