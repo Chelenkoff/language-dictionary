@@ -1,0 +1,168 @@
+<dict_data>
+	<languages>
+		<language>
+			<name>English</name>
+			<descriptor>en</descriptor>
+		</language>
+		<language>
+			<name>Bulgarian</name>
+			<descriptor>bg</descriptor>
+		</language>
+		<language>
+			<name>Deutsch</name>
+			<descriptor>de</descriptor>
+		</language>
+	</languages>
+	<words>
+		<word>
+			<en>dog</en>
+			<bg>куче</bg>
+			<de>der hund</de>
+		</word>
+		<word>
+			<en>cat</en>
+			<bg>игра</bg>
+			<de>die katze</de>
+		</word>		
+		<word>
+			<en>game</en>
+			<bg>игра</bg>
+			<de>das spiel</de>
+		</word>
+		<word>
+			<en>ball</en>
+			<bg>топка</bg>
+			<de>der ball</de>
+		</word>
+		<word>
+			<en>cloud</en>
+			<bg>облак</bg>
+			<de>die wolke</de>
+		</word>
+		<word>
+			<en>travel</en>
+			<bg>пътувам</bg>
+			<de>reise</de>
+		</word>
+		<word>
+			<en>school</en>
+			<bg>училище</bg>
+			<de>die schule</de>
+		</word>
+		<word>
+			<en>university</en>
+			<bg>университет</bg>
+			<de>die universität</de>
+		</word>
+		<word>
+			<en>city</en>
+			<bg>град</bg>
+			<de>die stadt</de>
+		</word>
+		<word>
+			<en>write</en>
+			<bg>пиша</bg>
+			<de>schreiben</de>
+		</word>
+		<word>
+			<en>read</en>
+			<bg>чета</bg>
+			<de>lesen</de>
+		</word>
+		<word>
+			<en>dress</en>
+			<bg>рокля</bg>
+			<de>das kleid</de>
+		</word>
+		<word>
+			<en>car</en>
+			<bg>автомобил</bg>
+			<de>das auto</de>
+		</word>
+		<word>
+			<en>window</en>
+			<bg>прозорец</bg>
+			<de>das fenster</de>
+		</word>
+		<word>
+			<en>fly</en>
+			<bg>лети</bg>
+			<de>fliegen</de>
+		</word>
+		<word>
+			<en>swim</en>
+			<bg>плува</bg>
+			<de>schwimmen</de>
+		</word>
+		<word>
+			<en>country</en>
+			<bg>държава</bg>
+			<de>das land</de>
+		</word>
+		<word>
+			<en>river</en>
+			<bg>река</bg>
+			<de>der fluss</de>
+		</word>
+		<word>
+			<en>bus</en>
+			<bg>автобус</bg>
+			<de>der bus</de>
+		</word>
+		<word>
+			<en>kinder garden</en>
+			<bg>детска градина</bg>
+			<de>der kindergarten</de>
+		</word>
+		<word>
+			<en>exam</en>
+			<bg>изпит</bg>
+			<de>die prüfung</de>
+		</word>
+		<word>
+			<en>toy</en>
+			<bg>играчка</bg>
+			<de>das spielzeug</de>
+		</word>
+		<word>
+			<en>animal</en>
+			<bg>животно</bg>
+			<de>das tier</de>
+		</word>
+		<word>
+			<en>sing</en>
+			<bg>пея</bg>
+			<de>singen</de>
+		</word>
+		<word>
+			<en>cry</en>
+			<bg>плача</bg>
+			<de>schreien</de>
+		</word>
+		<word>
+			<en>book</en>
+			<bg>книга</bg>
+			<de>das buch</de>
+		</word>
+		<word>
+			<en>pen</en>
+			<bg>химикал</bg>
+			<de>der kugelschreiber</de>
+		</word>
+		<word>
+			<en>speed limit</en>
+			<bg>ограничение на скоростта</bg>
+			<de>die geschwindigkeitsbegrenzung</de>
+		</word>
+		<word>
+			<en>apple juice</en>
+			<bg>ябълков сок</bg>
+			<de>der apfelsaft</de>
+		</word>
+		<word>
+			<en>love</en>
+			<bg>обичам</bg>
+			<de>lieben</de>
+		</word>
+	</words>
+</dict_data>
