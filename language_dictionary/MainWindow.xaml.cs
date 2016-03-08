@@ -27,11 +27,14 @@ namespace language_dictionary
         {
             InitializeComponent();
         }
+        //Controller declaration
         DictController dictController;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //Controller init
             dictController = new DictController(".\\Resources\\data.xml");
+            //Populating 'to' and 'from' comboboxes
             defaultPopulateToAndFromComboBoxes();
             
         }
@@ -50,8 +53,11 @@ namespace language_dictionary
             comboBoxToLang.SelectedIndex = 1;
         }
 
-        private void btnTestLINQ_Click(object sender, RoutedEventArgs e)
+ 
+
+        private void btnParseWords_Click(object sender, RoutedEventArgs e)
         {
+
             txtBlockTest.Text = "";
             string descrTo = "";
             string descrFrom = "";
@@ -62,10 +68,9 @@ namespace language_dictionary
                 if (lang.getName().Equals(comboBoxToLang.SelectedValue.ToString()))
                     descrTo = lang.getDescriptor();
             }
-            
-           txtBlockTest.Text = XMLParserLINQ.parseTranslatedWordFromWordAndUrl(txtBoxWordToTranslate.Text, descrFrom, descrTo, ".\\Resources\\data.xml");
-        }
 
+            txtBlockTest.Text = dictController.translateWord(txtBoxWordToTranslate.Text, descrFrom, descrTo);
+        }
 
     }
 }

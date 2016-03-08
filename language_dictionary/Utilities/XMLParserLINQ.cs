@@ -1,4 +1,5 @@
-﻿using System;
+﻿using language_dictionary;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,13 +10,18 @@ namespace language_dictionary.Utilities
 {
     class XMLParserLINQ
     {
+        //Creating document
+        XDocument doc = new XDocument();
 
-        //Creating Languages set from XML
-        public static HashSet<Language> parseLanguagesFromXML(String url)
+        //Parser constructor
+        public XMLParserLINQ(String filePath)
+        {
+            doc = XDocument.Parse(File.ReadAllText(filePath));
+        }
+        //Creating LANGUAGE set from XML
+        public  HashSet<Language> parseLanguagesFromXML()
         {
             HashSet<Language> langs = new HashSet<Language>();
-
-            XDocument doc = XDocument.Parse(File.ReadAllText(url));
 
             var data = from item in doc.Descendants("language")
                        select new
@@ -32,31 +38,25 @@ namespace language_dictionary.Utilities
             return langs;
         }
 
-        //Finding translated word
-        public static string parseTranslatedWordFromWordAndUrl(string word, string langDescriptorFrom, string langDescriptorTo, string url)
+        //Creating WORD set from XML
+        public  HashSet<Word> parseWordsFromXML()
         {
-            string translatedWord = "";
-
-            XDocument doc = XDocument.Parse(File.ReadAllText(url));
-
-
-
+            HashSet<Word> words = new HashSet<Word>();
 
             var data = from item in doc.Descendants("word")
-                       where item.Element(langDescriptorFrom).Value.ToString() == word
-                       select new
-                       {
+                       select item;      
 
-                           newWord = item.Element(langDescriptorTo).Value.ToString(),
-                       };
             foreach (var item in data)
             {
-                translatedWord = item.newWord;
-                break;
+                Word word = new Word();
+                foreach(var wordInLanguage in item.Elements())
+                {
+                    word.addDescriptorAsKeyAndWordAsValue(wordInLanguage.Name.ToString(), wordInLanguage.Value);
+                }
+                words.Add(word);
+                
             }
-            return translatedWord;
-            
+            return words;
         }
-
     }
 }

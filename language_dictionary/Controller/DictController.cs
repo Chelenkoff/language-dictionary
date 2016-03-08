@@ -1,4 +1,5 @@
-﻿using language_dictionary.Utilities;
+﻿using language_dictionary;
+using language_dictionary.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,8 +13,16 @@ namespace language_dictionary.Controller
     class DictController
     {
         private HashSet<Language> availLangs = new HashSet<Language>();
+        private HashSet<Word> allWords = new HashSet<Word>();
+        private XMLParserLINQ xmlParser;
 
-        //Available Languages 
+
+        //Gets all available words
+        public HashSet<Word> getAllWords()
+        {
+            return allWords;
+        }
+        //Gets all available Languages 
         public HashSet<Language> getAvailLangs()
         {
             return availLangs;
@@ -22,10 +31,30 @@ namespace language_dictionary.Controller
         //Constructor
         public DictController(string fileUrl)
         {
+            //Creating and initializing parser
+            xmlParser = new XMLParserLINQ(fileUrl);
             //Parsing available languages from XML
-            availLangs = XMLParserLINQ.parseLanguagesFromXML(fileUrl);
+            availLangs = xmlParser.parseLanguagesFromXML();
+            //Parsing available words from XML
+            allWords = xmlParser.parseWordsFromXML();
            
         }
-        
+
+
+        //Word translation method
+        public string translateWord(string word, string langDescriptorFrom, string langDescriptorTo)
+        {
+            string translatedWord = "";
+            foreach (Word wd in getAllWords())
+            {
+                if (wd.getWordByDescriptor(langDescriptorFrom).Equals(word))
+                {
+                    translatedWord = wd.getWordByDescriptor(langDescriptorTo);
+                    break;
+                }
+
+            }
+            return translatedWord;
+        }    
     }
 }
