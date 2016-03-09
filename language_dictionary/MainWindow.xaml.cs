@@ -1,5 +1,6 @@
 ﻿using language_dictionary.Controller;
 using language_dictionary.Utilities;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,27 +17,42 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 
+
 namespace language_dictionary
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow 
     {
+        //Controller declaration
+        DictController dictController;
         public MainWindow()
         {
             InitializeComponent();
-        }
-        //Controller declaration
-        DictController dictController;
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            
             //Controller init
             dictController = new DictController(".\\Resources\\data.xml");
             //Populating 'to' and 'from' comboboxes
             defaultPopulateToAndFromComboBoxes();
-            
+        }
+
+        //BTN Parse Word
+        private void btnTranslate_Click(object sender, RoutedEventArgs e)
+        {
+
+            lblTranslatedWord.Content = "";
+            string descrTo = "";
+            string descrFrom = "";
+            foreach (Language lang in dictController.getAvailLangs())
+            {
+                if (lang.getName().Equals(comboBoxFromLang.SelectedValue.ToString()))
+                    descrFrom = lang.getDescriptor();
+                if (lang.getName().Equals(comboBoxToLang.SelectedValue.ToString()))
+                    descrTo = lang.getDescriptor();
+            }
+
+            lblTranslatedWord.Content = dictController.translateWord(txtBoxWordToTranslate.Text, descrFrom, descrTo);
         }
 
         private void defaultPopulateToAndFromComboBoxes()
@@ -55,22 +71,8 @@ namespace language_dictionary
 
  
 
-        private void btnParseWords_Click(object sender, RoutedEventArgs e)
-        {
 
-            txtBlockTest.Text = "";
-            string descrTo = "";
-            string descrFrom = "";
-            foreach (Language lang in dictController.getAvailLangs())
-            {
-                if (lang.getName().Equals(comboBoxFromLang.SelectedValue.ToString()))
-                    descrFrom = lang.getDescriptor();
-                if (lang.getName().Equals(comboBoxToLang.SelectedValue.ToString()))
-                    descrTo = lang.getDescriptor();
-            }
 
-            txtBlockTest.Text = dictController.translateWord(txtBoxWordToTranslate.Text, descrFrom, descrTo);
-        }
 
     }
 }

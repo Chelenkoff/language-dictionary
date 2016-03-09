@@ -8,7 +8,7 @@ namespace language_dictionary
     class Language
     {
         private string name;
-        private string descriptor { get; set; }
+        private string descriptor;
 
         //Constructor
         public Language(string name, string descriptor)

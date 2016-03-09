@@ -47,7 +47,7 @@ namespace language_dictionary.Controller
             string translatedWord = "";
             foreach (Word wd in getAllWords())
             {
-                if (wd.getWordByDescriptor(langDescriptorFrom).Equals(word))
+                if (wd.getWordByDescriptor(langDescriptorFrom).Equals(word, StringComparison.InvariantCultureIgnoreCase))
                 {
                     translatedWord = wd.getWordByDescriptor(langDescriptorTo);
                     break;
