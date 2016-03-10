@@ -1,4 +1,5 @@
 ﻿using language_dictionary;
+using language_dictionary.Model;
 using language_dictionary.Utilities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace language_dictionary.Controller
 {
     class DictController
     {
-        private HashSet<Language> availLangs = new HashSet<Language>();
+        private Languages availLangs = new Languages();
         private HashSet<Word> allWords = new HashSet<Word>();
         private XMLParserLINQ xmlParser;
 
@@ -22,8 +23,10 @@ namespace language_dictionary.Controller
         {
             return allWords;
         }
-        //Gets all available Languages 
-        public HashSet<Language> getAvailLangs()
+
+
+        //Gets Languages object
+        public Languages getLanguagesObject()
         {
             return availLangs;
         }
@@ -34,7 +37,7 @@ namespace language_dictionary.Controller
             //Creating and initializing parser
             xmlParser = new XMLParserLINQ(fileUrl);
             //Parsing available languages from XML
-            availLangs = xmlParser.parseLanguagesFromXML();
+            availLangs = xmlParser.parseNewLanguagesFromXML();
             //Parsing available words from XML
             allWords = xmlParser.parseWordsFromXML();
            
@@ -42,19 +45,23 @@ namespace language_dictionary.Controller
 
 
         //Word translation method
-        public string translateWord(string word, string langDescriptorFrom, string langDescriptorTo)
+        public string translateNewWord(string word, string langNameFrom, string langNameTo)
         {
             string translatedWord = "";
+            string langNameDescrFrom = availLangs.getLangDescriptorByName(langNameFrom);
+            string langNameDescrTo = availLangs.getLangDescriptorByName(langNameTo);
             foreach (Word wd in getAllWords())
             {
-                if (wd.getWordByDescriptor(langDescriptorFrom).Equals(word, StringComparison.InvariantCultureIgnoreCase))
+
+                if (wd.getWordByDescriptor(langNameDescrFrom).Equals(word, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    translatedWord = wd.getWordByDescriptor(langDescriptorTo);
+                    translatedWord = wd.getWordByDescriptor(langNameDescrTo);
                     break;
                 }
 
             }
             return translatedWord;
-        }    
+
+        }
     }
 }

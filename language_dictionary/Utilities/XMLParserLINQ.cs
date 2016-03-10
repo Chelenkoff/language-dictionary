@@ -1,4 +1,5 @@
 ﻿using language_dictionary;
+using language_dictionary.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,10 +19,11 @@ namespace language_dictionary.Utilities
         {
             doc = XDocument.Parse(File.ReadAllText(filePath));
         }
-        //Creating LANGUAGE set from XML
-        public  HashSet<Language> parseLanguagesFromXML()
+
+        //Creating 'Languages' Object containing languages dict from XML
+        public Languages parseNewLanguagesFromXML()
         {
-            HashSet<Language> langs = new HashSet<Language>();
+            Languages allLangs = new Languages();
 
             var data = from item in doc.Descendants("language")
                        select new
@@ -32,10 +34,9 @@ namespace language_dictionary.Utilities
 
             foreach (var item in data)
             {
-                Language lang = new Language(item.name, item.descriptor);
-                langs.Add(lang);
+                allLangs.addDescriptorAsKeyAnLangAsValue(item.descriptor, item.name);
             }
-            return langs;
+            return allLangs;
         }
 
         //Creating WORD set from XML

@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Languages.cs" />
     <Compile Include="Model\Word.cs" />
     <Compile Include="Utilities\XMLParserLINQ.cs" />
     <Page Include="MainWindow.xaml">
@@ -71,7 +72,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controller\DictController.cs" />
-    <Compile Include="Model\Language.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

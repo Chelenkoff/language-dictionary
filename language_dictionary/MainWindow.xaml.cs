@@ -26,7 +26,7 @@ namespace language_dictionary
     public partial class MainWindow 
     {
         //Controller declaration
-        DictController dictController;
+        DictController dictController ;
         public MainWindow()
         {
             InitializeComponent();
@@ -42,37 +42,24 @@ namespace language_dictionary
         {
 
             lblTranslatedWord.Content = "";
-            string descrTo = "";
-            string descrFrom = "";
-            foreach (Language lang in dictController.getAvailLangs())
-            {
-                if (lang.getName().Equals(comboBoxFromLang.SelectedValue.ToString()))
-                    descrFrom = lang.getDescriptor();
-                if (lang.getName().Equals(comboBoxToLang.SelectedValue.ToString()))
-                    descrTo = lang.getDescriptor();
-            }
-
-            lblTranslatedWord.Content = dictController.translateWord(txtBoxWordToTranslate.Text, descrFrom, descrTo);
+            lblTranslatedWord.Content = dictController.translateNewWord(txtBoxWordToTranslate.Text, comboBoxFromLang.SelectedValue.ToString(), comboBoxToLang.SelectedValue.ToString());
         }
 
+        //CombBoxes default population
         private void defaultPopulateToAndFromComboBoxes()
         {
             comboBoxFromLang.Items.Clear();
             comboBoxToLang.Items.Clear();
-            foreach (Language lang in dictController.getAvailLangs())
-            {
-                comboBoxFromLang.Items.Add(lang.getName());
-                comboBoxToLang.Items.Add(lang.getName());
 
+            foreach (KeyValuePair<string, string> entry in dictController.getLanguagesObject().getAllLangs())
+            {
+                comboBoxFromLang.Items.Add(entry.Value);
+                comboBoxToLang.Items.Add(entry.Value);
             }
+
             comboBoxFromLang.SelectedIndex = 0;
             comboBoxToLang.SelectedIndex = 1;
         }
-
- 
-
-
-
 
     }
 }
