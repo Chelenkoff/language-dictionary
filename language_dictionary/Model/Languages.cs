@@ -25,5 +25,10 @@ namespace language_dictionary.Model
         {
             return allLangs;
         }
+
+        public HashSet<string> getAllLangsNames()
+        {
+            return new HashSet<string>(allLangs.Values);
+        }
     }
 }

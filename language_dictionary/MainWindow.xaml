@@ -3,7 +3,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="3-Way Translator" Height="366.418" Width="551.866" ResizeMode="CanMinimize">
+        Title="3-Way Translator" 
+        Height="366.418" 
+        Width="551.866" 
+        ResizeMode="CanMinimize"
+                     
+        GlowBrush="{DynamicResource AccentColorBrush}"
+
+        WindowStartupLocation="CenterScreen">
 
     <!--Window resources-->
     <Controls:MetroWindow.Resources>
@@ -29,7 +36,7 @@
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cog}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    
+
                 </StackPanel>
             </Button>
         </Controls:WindowCommands>
@@ -56,13 +63,32 @@
 
     <!--Main Grid-->
     <Grid>
-        <ComboBox x:Name="comboBoxFromLang" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top" Width="153"/>
-        <ComboBox x:Name="comboBoxToLang" HorizontalAlignment="Left" Margin="381,144,0,0" VerticalAlignment="Top" Width="153"/>
-        <TextBox x:Name="txtBoxWordToTranslate" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Controls:TextBoxHelper.Watermark="This is a textbox" x:Name="txtBoxWordToTranslate" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="lblTranslatedWord" Content="" HorizontalAlignment="Left" Margin="381,176,0,0" VerticalAlignment="Top" Width="153" Height="29"/>
-        <Button x:Name="btnTranslate" Content="Translate" HorizontalAlignment="Left" Margin="233,234,0,0" VerticalAlignment="Top" Width="75" Click="btnTranslate_Click"/>
+        <Button x:Name="btnTranslate" Content="Translate" HorizontalAlignment="Left" Margin="233,234,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource SquareButtonStyle}" Click="btnTranslate_Click"/>
+
+        <Grid Margin="10,48,10,189">
+            <Controls:SplitButton x:Name="splitBtnLangFrom" 
+    Icon="{DynamicResource appbar_book_perspective}"
+    HorizontalContentAlignment="Left"
+    HorizontalAlignment="left"
+    VerticalContentAlignment="Center"
+    Width="190"
+    Height="79"
+    VerticalAlignment="Center"  FontSize="18" Click="splitBtnLangFrom_Click" />
+
+            <Controls:SplitButton x:Name="splitBtnLangTo" 
+    Icon="{DynamicResource appbar_book_perspective_help}"
+    HorizontalContentAlignment="Left"
+    HorizontalAlignment="Right"
+    VerticalContentAlignment="Center"
+    Width="190"
+    Height="79"
+    VerticalAlignment="Center"  FontSize="18" Click="splitBtnLangTo_Click" />
+        </Grid>
+        
     </Grid>
-    
+
 
 </Controls:MetroWindow>
 

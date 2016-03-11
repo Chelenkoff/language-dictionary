@@ -34,32 +34,52 @@ namespace language_dictionary
             //Controller init
             dictController = new DictController(".\\Resources\\data.xml");
             //Populating 'to' and 'from' comboboxes
-            defaultPopulateToAndFromComboBoxes();
+            defaultPopulateToAndFromComboBoxes();   
         }
 
         //BTN Parse Word
         private void btnTranslate_Click(object sender, RoutedEventArgs e)
         {
-
+            
             lblTranslatedWord.Content = "";
-            lblTranslatedWord.Content = dictController.translateNewWord(txtBoxWordToTranslate.Text, comboBoxFromLang.SelectedValue.ToString(), comboBoxToLang.SelectedValue.ToString());
+            lblTranslatedWord.Content = dictController.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
+
         }
 
         //CombBoxes default population
         private void defaultPopulateToAndFromComboBoxes()
         {
-            comboBoxFromLang.Items.Clear();
-            comboBoxToLang.Items.Clear();
+            splitBtnLangFrom.Items.Clear();
+            splitBtnLangTo.Items.Clear();
 
-            foreach (KeyValuePair<string, string> entry in dictController.getLanguagesObject().getAllLangs())
-            {
-                comboBoxFromLang.Items.Add(entry.Value);
-                comboBoxToLang.Items.Add(entry.Value);
-            }
+            splitBtnLangFrom.ItemsSource = dictController.getLanguagesObject().getAllLangsNames();
+            splitBtnLangTo.ItemsSource = splitBtnLangFrom.ItemsSource;
 
-            comboBoxFromLang.SelectedIndex = 0;
-            comboBoxToLang.SelectedIndex = 1;
+            splitBtnLangFrom.SelectedIndex = 0;
+            splitBtnLangTo.SelectedIndex = 1;
         }
+
+
+        //SplitBtnLangFrom Click
+        private void splitBtnLangFrom_Click(object sender, RoutedEventArgs e)
+        {
+            if(splitBtnLangFrom.IsExpanded)
+                splitBtnLangFrom.IsExpanded = false;
+            else
+                splitBtnLangFrom.IsExpanded = true;
+        }
+
+        //SplitBtnLangTo Click
+        private void splitBtnLangTo_Click(object sender, RoutedEventArgs e)
+        {
+            if (splitBtnLangTo.IsExpanded)
+                splitBtnLangTo.IsExpanded = false;
+            else
+                splitBtnLangTo.IsExpanded = true;
+        }
+
+       
+
 
     }
 }
