@@ -60,7 +60,7 @@ namespace language_dictionary.Controller
                 }
 
             }
-            return translatedWord;
+            return translatedWord.ToUpperInvariant();
 
         }
     }
