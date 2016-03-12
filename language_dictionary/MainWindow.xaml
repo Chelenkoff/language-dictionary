@@ -18,9 +18,12 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Controls:MetroWindow.Resources>
+
+
 
     <!--Window Top Right Menu Items-->
     <Controls:MetroWindow.RightWindowCommands>
@@ -43,6 +46,8 @@
     </Controls:MetroWindow.RightWindowCommands>
 
 
+
+
     <!--Window Top Left Menu Items-->
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
@@ -60,39 +65,60 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.LeftWindowCommands>
 
+
+
+
     <!--Main Grid-->
     <Grid>
-        <TextBox Controls:TextBoxHelper.Watermark="Enter word here" Controls:TextBoxHelper.ClearTextButton="True" x:Name="txtBoxWordToTranslate" HorizontalAlignment="Left" Height="56" Margin="10,176,0,0" TextWrapping="Wrap"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="191" FontSize="18"/>
-        <Label x:Name="lblTranslatedWord" BorderThickness="1" BorderBrush="DeepSkyBlue" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="351,176,0,0" VerticalAlignment="Top" Width="187" Height="56" FontSize="18" />
-        <Button x:Name="btnTranslate" Content="{DynamicResource appbar_magnify_forward}"  HorizontalAlignment="Left" Margin="235,162,0,0" VerticalAlignment="Top" Width="84" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnTranslate_Click" Height="84" />
 
-        <!--Grid Containing the lists of languages-->
-        <Grid Margin="10,48,10,175">
-            <Controls:SplitButton x:Name="splitBtnLangFrom" 
-    Icon="{DynamicResource appbar_book_perspective}"
-    HorizontalContentAlignment="Left"
-    HorizontalAlignment="left"
-    VerticalContentAlignment="Center"
-    Width="190"
-    Height="79"
-    VerticalAlignment="Center"  FontSize="18" Click="splitBtnLangFrom_Click" />
+        <!--Tab Control-->
+        <TabControl Controls:TabControlHelper.IsUnderlined="True">
+            <Controls:MetroTabItem Header="Translate">
+                <Grid>
+                    <!--EnterWordHere watermark-->
+                    <TextBox Controls:TextBoxHelper.Watermark="Enter word here" Controls:TextBoxHelper.ClearTextButton="True" x:Name="txtBoxWordToTranslate" HorizontalAlignment="Left" Height="56" Margin="10,176,0,0" TextWrapping="Wrap"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="191" FontSize="18"/>
+                    <!--Translated word label-->
+                    <Label x:Name="lblTranslatedWord" BorderThickness="1" BorderBrush="DeepSkyBlue" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="345,176,0,0" VerticalAlignment="Top" Width="193" Height="56" FontSize="18" />
+                    <!--Translate button-->
+                    <Button x:Name="btnTranslate" Content="{DynamicResource appbar_magnify_forward}"  HorizontalAlignment="Left" Margin="229,160,0,0" VerticalAlignment="Top" Width="84" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnTranslate_Click" Height="84" />
 
-            <!--SplitBtnLang TO-->
-            <Controls:SplitButton x:Name="splitBtnLangTo" 
-    Icon="{DynamicResource appbar_book_perspective_help}"
-    HorizontalContentAlignment="Left"
-    HorizontalAlignment="Right"
-    VerticalContentAlignment="Center"
-    Width="190"
-    Height="79"
-    VerticalAlignment="Center"  FontSize="18" Click="splitBtnLangTo_Click" />
-        </Grid>
-        <!--Exchange languages btn-->
-        <Button x:Name="btnExchangeLangs"  Content="{DynamicResource appbar_repeat}"  HorizontalAlignment="Left" Margin="234,64,0,0" VerticalAlignment="Top" Width="84" Height="84" Style="{DynamicResource MetroCircleButtonStyle}" BorderThickness="1" Padding="1" Background="Transparent" Click="btnExchangeLangs_Click" />
+                    <!--Grid Containing the lists of languages-->
+                    <Grid Margin="10,48,10,151">
+                        <!--List of languages From-->
+                        <Controls:SplitButton x:Name="splitBtnLangFrom" 
+                             Icon="{DynamicResource appbar_book_perspective}"
+                             HorizontalContentAlignment="Left"
+                             HorizontalAlignment="Left"
+                             VerticalContentAlignment="Center"
+                             Width="190"
+                             Height="79"
+                             VerticalAlignment="Center" 
+                             FontSize="18" 
+                             Click="splitBtnLangFrom_Click" />
+
+                        <!--List of languages TO-->
+                        <Controls:SplitButton x:Name="splitBtnLangTo" 
+                            Icon="{DynamicResource appbar_book_perspective_help}"
+                            HorizontalContentAlignment="Left"
+                            HorizontalAlignment="Right"
+                            VerticalContentAlignment="Center"
+                            Width="190"
+                            Height="79"
+                            VerticalAlignment="Center"
+                            FontSize="18" 
+                            Click="splitBtnLangTo_Click" />
+                    </Grid>
+                    <!--Exchange languages btn-->
+                    <Button x:Name="btnExchangeLangs"  Content="{DynamicResource appbar_repeat}"  HorizontalAlignment="Left" Margin="229,55,0,0" VerticalAlignment="Top" Width="84" Height="84" Style="{DynamicResource MetroCircleButtonStyle}" BorderThickness="1" Padding="1" Background="Transparent" Click="btnExchangeLangs_Click" />
+                </Grid>
+
+            </Controls:MetroTabItem>
+            <Controls:MetroTabItem Header="Previously translated">
+                <TextBlock FontSize="30" Text="More cool transition" />
+            </Controls:MetroTabItem>
+        </TabControl>
 
     </Grid>
-
-
 </Controls:MetroWindow>
 
     

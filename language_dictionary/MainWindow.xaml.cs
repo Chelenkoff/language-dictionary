@@ -106,14 +106,11 @@ namespace language_dictionary
             
         }
 
-
-
-           
-
-
-
-
-       
+        private void MetroTabControl_TabItemClosingEvent(object sender, BaseMetroTabControl.TabItemClosingEventArgs e)
+        {
+            if (e.ClosingTabItem.Header.ToString().StartsWith("sizes"))
+                e.Cancel = true;
+        }
       
 
     }
