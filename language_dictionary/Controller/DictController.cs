@@ -50,17 +50,19 @@ namespace language_dictionary.Controller
             string translatedWord = "";
             string langNameDescrFrom = availLangs.getLangDescriptorByName(langNameFrom);
             string langNameDescrTo = availLangs.getLangDescriptorByName(langNameTo);
+
+
+            if (String.IsNullOrWhiteSpace(word))
+                return "EMPTY_FIELD";
+
             foreach (Word wd in getAllWords())
             {
-
                 if (wd.getWordByDescriptor(langNameDescrFrom).Equals(word, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    translatedWord = wd.getWordByDescriptor(langNameDescrTo);
-                    break;
-                }
-
+                    return wd.getWordByDescriptor(langNameDescrTo).ToUpperInvariant();
             }
-            return translatedWord.ToUpperInvariant();
+
+            
+             return "NOT_FOUND";
 
         }
     }

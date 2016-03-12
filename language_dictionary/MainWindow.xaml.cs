@@ -1,6 +1,7 @@
 ﻿using language_dictionary.Controller;
 using language_dictionary.Utilities;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,7 +43,21 @@ namespace language_dictionary
         {
             
             lblTranslatedWord.Content = "";
-            lblTranslatedWord.Content = dictController.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
+            string translatedWord = dictController.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
+            switch (translatedWord)
+            {
+                case "NOT_FOUND":
+                    this.ShowMessageAsync(String.Format("The Word \"{0}\" was not found", txtBoxWordToTranslate.Text), "The specified word does not exist in the current data file or in the specified language");
+                    break;
+                case "EMPTY_FIELD":
+                    this.ShowMessageAsync("No word inserted", "The word field is blank. Please insert a word");
+                    txtBoxWordToTranslate.Text = "";
+                    break;
+                default:
+                    lblTranslatedWord.Content = dictController.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
+                    break;
+            }
+            
 
         }
 
@@ -78,8 +93,28 @@ namespace language_dictionary
                 splitBtnLangTo.IsExpanded = true;
         }
 
-       
 
+        //Exchange languages Button_click
+        private void btnExchangeLangs_Click(object sender, RoutedEventArgs e)
+        {
+            object selectedToLang = splitBtnLangTo.SelectedItem;
+
+            splitBtnLangTo.SelectedItem = splitBtnLangFrom.SelectedItem;
+            splitBtnLangFrom.SelectedItem = selectedToLang;
+
+            lblTranslatedWord.Content = "";
+            
+        }
+
+
+
+           
+
+
+
+
+       
+      
 
     }
 }
