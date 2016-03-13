@@ -13,6 +13,7 @@ namespace language_dictionary.Controller
 {
     class DictController
     {
+        private const int maxNumOfRecentlyTranslated = 10;
         private Languages availLangs = new Languages();
         private HashSet<Word> allWords = new HashSet<Word>();
         private XMLParserLINQ xmlParser;
@@ -58,12 +59,63 @@ namespace language_dictionary.Controller
             foreach (Word wd in getAllWords())
             {
                 if (wd.getWordByDescriptor(langNameDescrFrom).Equals(word, StringComparison.InvariantCultureIgnoreCase))
+                    
                     return wd.getWordByDescriptor(langNameDescrTo).ToUpperInvariant();
             }
-
-            
              return "NOT_FOUND";
-
         }
+
+        //Adding word info to recently translated xml file
+        public void addToRecentlyTranslated(string word, string langFrom, string langTo, DateTime dt)
+        {
+
+            //If file does not exist - creat it
+            if (File.Exists(".\\Resources\\recently_translated.xml") == false)
+            {
+                XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
+                xmlWriterSettings.Indent = true;
+                xmlWriterSettings.NewLineOnAttributes = true;
+                using (XmlWriter xmlWriter = XmlWriter.Create(".\\Resources\\recently_translated.xml", xmlWriterSettings))
+                {
+                    xmlWriter.WriteStartDocument();
+                    xmlWriter.WriteStartElement("Words");
+
+                    xmlWriter.WriteStartElement("Word");
+                    xmlWriter.WriteElementString("Value", word);
+                    xmlWriter.WriteElementString("Lang_From", langFrom);
+                    xmlWriter.WriteElementString("Lang_To", langTo);
+                    xmlWriter.WriteElementString("DateTime", dt.ToString());
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteEndElement();
+                    xmlWriter.WriteEndDocument();
+                    xmlWriter.Flush();
+                    xmlWriter.Close();
+                }
+            }
+            /*If it exists - Append data... if nodes are more than 'maxNumOfRecentlyTranslated'
+            most recently entered will override least recently entered */
+            else
+            {
+                XDocument xDocument = XDocument.Load(".\\Resources\\recently_translated.xml");
+                XElement root = xDocument.Element("Words");
+
+                
+                int count = root.Descendants("Word").Count();
+                if (count >= maxNumOfRecentlyTranslated)
+                {
+                    root.Descendants("Word").LastOrDefault().Remove();
+                }
+
+                root.AddFirst(new XElement("Word",
+                        new XElement("Value", word),
+                        new XElement("Lang_From", langFrom),
+                        new XElement("Lang_To", langTo),
+                        new XElement("DateTime", dt.ToString())));
+                
+                xDocument.Save(".\\Resources\\recently_translated.xml");
+            }
+         }
+        
     }
 }

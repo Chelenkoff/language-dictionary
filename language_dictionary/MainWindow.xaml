@@ -6,7 +6,7 @@
         Title="Simply Translate!" 
         Height="366.418" 
         Width="551.866" 
-        ResizeMode="CanMinimize"      
+        ResizeMode="CanMinimize"     
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterScreen">
 
