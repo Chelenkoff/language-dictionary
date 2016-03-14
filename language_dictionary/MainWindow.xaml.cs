@@ -135,12 +135,28 @@ namespace language_dictionary
                     return;
                 }
 
+               
                 //Populating dataGrid
                 XElement wordList = XElement.Load(xmlLocation);
                 dataGridPreviouslyTranslated.DataContext = wordList;       
                 
             }
         }
+
+        //Settings button
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            //Show flyout control
+            flyOut.IsOpen = true;
+        }
+
+        //About button
+        private void btnAbout_Click(object sender, RoutedEventArgs e)
+        {
+            flyOutAbout.IsOpen = true;
+        }
+
+
 
     }
 }
