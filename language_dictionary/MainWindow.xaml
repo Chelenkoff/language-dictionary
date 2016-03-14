@@ -72,7 +72,8 @@
     <Grid>
 
         <!--Tab Control-->
-        <TabControl Controls:TabControlHelper.IsUnderlined="True">
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
+            <!--Translate tab item-->
             <Controls:MetroTabItem Header="Translate">
                 <Grid>
                     <!--EnterWordHere watermark-->
@@ -111,11 +112,25 @@
                     <!--Exchange languages btn-->
                     <Button x:Name="btnExchangeLangs"  Content="{DynamicResource appbar_repeat}"  HorizontalAlignment="Left" Margin="229,55,0,0" VerticalAlignment="Top" Width="84" Height="84" Style="{DynamicResource MetroCircleButtonStyle}" BorderThickness="1" Padding="1" Background="Transparent" Click="btnExchangeLangs_Click" />
                 </Grid>
+            </Controls:MetroTabItem>
+            
+            <!--Recently translated tabItem-->
+            <Controls:MetroTabItem x:Name="tabItemRecentlyTranslated"  Header="Recently translated">
+                <Grid>
+                    <!--Top10 DataGrid-->
+                    <DataGrid x:Name="dataGridPreviouslyTranslated" ItemsSource="{Binding Path=Elements[Word]}" Margin="10,48,10,23" AutoGenerateColumns="False" GridLinesVisibility="All" HorizontalGridLinesBrush="#FF9FBDF4" VerticalGridLinesBrush="#FFF1F2F7" HorizontalAlignment="Center" Cursor="Hand" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Word To Translate" Binding="{Binding Path=Element[Value].Value}" FontSize="17"/>
+                            <DataGridTextColumn Header="From Language" Binding="{Binding Path=Element[Lang_From].Value}" FontSize="16"/>
+                            <DataGridTextColumn Header="To Language" Binding="{Binding Path=Element[Lang_To].Value}" FontSize="16"/>
+                            <DataGridTextColumn Header="Date and Time" Binding="{Binding Path=Element[DateTime].Value}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--Info label-->
+                    <Label x:Name="lblInfo" Content="10 Most recently translated words" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF60C3ED"/>
+                </Grid>
+            </Controls:MetroTabItem>
 
-            </Controls:MetroTabItem>
-            <Controls:MetroTabItem Header="Previously translated">
-                <TextBlock FontSize="30" Text="More cool transition" />
-            </Controls:MetroTabItem>
         </TabControl>
 
     </Grid>

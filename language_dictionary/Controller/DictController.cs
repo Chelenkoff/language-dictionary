@@ -70,12 +70,15 @@ namespace language_dictionary.Controller
         {
 
             //If file does not exist - creat it
-            if (File.Exists(".\\Resources\\recently_translated.xml") == false)
+            //if (File.Exists(".\\Resources\\recently_translated.xml") == false)
+            if (File.Exists("recently_translated.xml") == false)
             {
                 XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
                 xmlWriterSettings.Indent = true;
                 xmlWriterSettings.NewLineOnAttributes = true;
-                using (XmlWriter xmlWriter = XmlWriter.Create(".\\Resources\\recently_translated.xml", xmlWriterSettings))
+                //using (XmlWriter xmlWriter = XmlWriter.Create(".\\Resources\\recently_translated.xml", xmlWriterSettings))
+                using (XmlWriter xmlWriter = XmlWriter.Create("recently_translated.xml", xmlWriterSettings))
+
                 {
                     xmlWriter.WriteStartDocument();
                     xmlWriter.WriteStartElement("Words");
@@ -97,7 +100,8 @@ namespace language_dictionary.Controller
             most recently entered will override least recently entered */
             else
             {
-                XDocument xDocument = XDocument.Load(".\\Resources\\recently_translated.xml");
+                //XDocument xDocument = XDocument.Load(".\\Resources\\recently_translated.xml");
+                XDocument xDocument = XDocument.Load("recently_translated.xml");
                 XElement root = xDocument.Element("Words");
 
                 
@@ -113,7 +117,9 @@ namespace language_dictionary.Controller
                         new XElement("Lang_To", langTo),
                         new XElement("DateTime", dt.ToString())));
                 
-                xDocument.Save(".\\Resources\\recently_translated.xml");
+                //xDocument.Save(".\\Resources\\recently_translated.xml");
+                xDocument.Save("recently_translated.xml");
+
             }
          }
         

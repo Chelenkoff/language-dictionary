@@ -4,8 +4,10 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -107,12 +109,38 @@ namespace language_dictionary
             
         }
 
+        //System event - Metro generated
         private void MetroTabControl_TabItemClosingEvent(object sender, BaseMetroTabControl.TabItemClosingEventArgs e)
         {
             if (e.ClosingTabItem.Header.ToString().StartsWith("sizes"))
                 e.Cancel = true;
         }
-      
+
+
+        //Changig tabs 
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //tabItemRecentlyTranslated checked test
+            if (tabItemRecentlyTranslated.IsSelected)
+            {
+                //Getting execution folder location
+                string executableLocation = System.IO.Path.GetDirectoryName(
+                                            Assembly.GetExecutingAssembly().Location);
+                string xmlLocation = System.IO.Path.Combine(executableLocation, "recently_translated.xml");
+
+                //Checking file existence
+                if (!File.Exists(xmlLocation))
+                {
+                    this.ShowMessageAsync("Words not available", "There are no translated words yet");
+                    return;
+                }
+
+                //Populating dataGrid
+                XElement wordList = XElement.Load(xmlLocation);
+                dataGridPreviouslyTranslated.DataContext = wordList;       
+                
+            }
+        }
 
     }
 }
