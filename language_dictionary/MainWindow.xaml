@@ -83,7 +83,7 @@
 
     <!--Main Grid-->
     <Grid>
-        
+
 
         <!--Tab Control-->
         <TabControl SelectionChanged="TabControl_SelectionChanged">
@@ -94,6 +94,10 @@
                     <TextBox Controls:TextBoxHelper.Watermark="Enter word here" Controls:TextBoxHelper.ClearTextButton="True" x:Name="txtBoxWordToTranslate" HorizontalAlignment="Left" Height="56" Margin="10,176,0,0" TextWrapping="Wrap"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="191" FontSize="18"/>
                     <!--Translated word label-->
                     <Label x:Name="lblTranslatedWord" BorderThickness="1" BorderBrush="DeepSkyBlue" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="345,176,0,0" VerticalAlignment="Top" Width="193" Height="56" FontSize="18" />
+                    <!--Speak button-->
+                    <Button x:Name="btnSpeak" Content="{DynamicResource appbar_speakerphone}"  HorizontalAlignment="Center" Margin="500,237,0,13" VerticalAlignment="Center"  Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Click="btnSpeak_Click" IsEnabled="False"  />
+
+
                     <!--Translate button-->
                     <Button x:Name="btnTranslate" Content="{DynamicResource appbar_magnify_forward}"  HorizontalAlignment="Left" Margin="229,160,0,0" VerticalAlignment="Top" Width="84" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnTranslate_Click" Height="84" />
 
@@ -127,7 +131,7 @@
                     <Button x:Name="btnExchangeLangs"  Content="{DynamicResource appbar_repeat}"  HorizontalAlignment="Left" Margin="229,55,0,0" VerticalAlignment="Top" Width="84" Height="84" Style="{DynamicResource MetroCircleButtonStyle}" BorderThickness="1" Padding="1" Background="Transparent" Click="btnExchangeLangs_Click" />
                 </Grid>
             </Controls:MetroTabItem>
-            
+
             <!--Recently translated tabItem-->
             <Controls:MetroTabItem x:Name="tabItemRecentlyTranslated"  Header="Recently translated">
                 <Grid>

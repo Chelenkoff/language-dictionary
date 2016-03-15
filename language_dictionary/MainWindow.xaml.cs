@@ -8,6 +8,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 
 
+
 namespace language_dictionary
 {
     /// <summary>
@@ -30,21 +32,33 @@ namespace language_dictionary
     {
         //Controller declaration
         DictController dictController ;
+        //Speech synthesizer declaration
+        private SpeechSynthesizer speechController;
         public MainWindow()
         {
             InitializeComponent();
             
             //Controller init
             dictController = new DictController(".\\Resources\\data.xml");
+
+            //Speech synthesizer init
+            speechController = new SpeechSynthesizer();
+
             //Populating 'to' and 'from' comboboxes
             defaultPopulateToAndFromComboBoxes();   
         }
 
+
+  
+
         //BTN Parse Word
         private void btnTranslate_Click(object sender, RoutedEventArgs e)
         {
-            
+            //Disabling 'Speak' Btn
+            btnSpeak.IsEnabled = false;
+            //Emptying translated label
             lblTranslatedWord.Content = "";
+
             string translatedWord = dictController.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
             switch (translatedWord)
             {
@@ -56,8 +70,12 @@ namespace language_dictionary
                     txtBoxWordToTranslate.Text = "";
                     break;
                 default:
+                    //Word found and translated
                     lblTranslatedWord.Content = dictController.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
                     dictController.addToRecentlyTranslated(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString(), DateTime.Now);
+                    //Enabling 'Speak' button for english
+                    if (splitBtnLangTo.SelectedItem.Equals("English"))
+                        btnSpeak.IsEnabled = true;
                     break;
             }
             
@@ -100,6 +118,7 @@ namespace language_dictionary
         //Exchange languages Button_click
         private void btnExchangeLangs_Click(object sender, RoutedEventArgs e)
         {
+            
             object selectedToLang = splitBtnLangTo.SelectedItem;
 
             splitBtnLangTo.SelectedItem = splitBtnLangFrom.SelectedItem;
@@ -156,6 +175,16 @@ namespace language_dictionary
             flyOutAbout.IsOpen = true;
         }
 
+        //Speak Btn click
+        private void btnSpeak_Click(object sender, RoutedEventArgs e)
+        {
+            speechController.SpeakAsync(lblTranslatedWord.Content.ToString());
+
+        }
+
+
+
+   
 
 
     }
