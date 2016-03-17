@@ -5,7 +5,7 @@ using System.Text;
 
 namespace language_dictionary
 {
-    class Word
+    public class Word
     {
         //Map ex:(en:dog) (bg:куче) (de:der Hund)
         private Dictionary<String, String> wordInAllLangs = new Dictionary<string,string>();

@@ -20,8 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-
-
+using System.Speech.Recognition;
 
 namespace language_dictionary
 {
@@ -34,8 +33,12 @@ namespace language_dictionary
         DictController dictController ;
         //Speech synthesizer declaration
         private SpeechSynthesizer speechController;
+
+        
+        //MainWindow Constructor
         public MainWindow()
         {
+            
             InitializeComponent();
             
             //Controller init
@@ -45,17 +48,27 @@ namespace language_dictionary
             speechController = new SpeechSynthesizer();
 
             //Populating 'to' and 'from' comboboxes
-            defaultPopulateToAndFromComboBoxes();   
+            defaultPopulateToAndFromComboBoxes();
+
+
+            
         }
 
+        //Reinstantiating default controller
+        public void reinstantiateController(string url)
+        {
+            dictController = new DictController(url);
+            defaultPopulateToAndFromComboBoxes();
+            this.ShowMessageAsync(String.Format("File \"{0}\" imported", url), "You can now use the new word set");
 
+        }
   
 
         //BTN Parse Word
         private void btnTranslate_Click(object sender, RoutedEventArgs e)
         {
             //Disabling 'Speak' Btn
-            btnSpeak.IsEnabled = false;
+            btnRead.IsEnabled = false;
             //Emptying translated label
             lblTranslatedWord.Content = "";
 
@@ -75,7 +88,7 @@ namespace language_dictionary
                     dictController.addToRecentlyTranslated(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString(), DateTime.Now);
                     //Enabling 'Speak' button for english
                     if (splitBtnLangTo.SelectedItem.Equals("English"))
-                        btnSpeak.IsEnabled = true;
+                        btnRead.IsEnabled = true;
                     break;
             }
             
@@ -85,8 +98,8 @@ namespace language_dictionary
         //CombBoxes default population
         private void defaultPopulateToAndFromComboBoxes()
         {
-            splitBtnLangFrom.Items.Clear();
-            splitBtnLangTo.Items.Clear();
+            splitBtnLangFrom.ClearValue(ItemsControl.ItemsSourceProperty);
+            splitBtnLangTo.ClearValue(ItemsControl.ItemsSourceProperty);
 
             splitBtnLangFrom.ItemsSource = dictController.getLanguagesObject().getAllLangsNames();
             splitBtnLangTo.ItemsSource = splitBtnLangFrom.ItemsSource;
@@ -118,7 +131,8 @@ namespace language_dictionary
         //Exchange languages Button_click
         private void btnExchangeLangs_Click(object sender, RoutedEventArgs e)
         {
-            
+            btnRead.IsEnabled = false;
+
             object selectedToLang = splitBtnLangTo.SelectedItem;
 
             splitBtnLangTo.SelectedItem = splitBtnLangFrom.SelectedItem;
@@ -128,7 +142,7 @@ namespace language_dictionary
             
         }
 
-        //System event - Metro generated
+        //TabControl - Metro generated
         private void MetroTabControl_TabItemClosingEvent(object sender, BaseMetroTabControl.TabItemClosingEventArgs e)
         {
             if (e.ClosingTabItem.Header.ToString().StartsWith("sizes"))
@@ -154,7 +168,6 @@ namespace language_dictionary
                     return;
                 }
 
-               
                 //Populating dataGrid
                 XElement wordList = XElement.Load(xmlLocation);
                 dataGridPreviouslyTranslated.DataContext = wordList;       
@@ -166,7 +179,10 @@ namespace language_dictionary
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             //Show flyout control
-            flyOut.IsOpen = true;
+
+            userControlSettings = new SettingsUserControl();
+
+            flyOutSettings.IsOpen = true;
         }
 
         //About button
@@ -175,17 +191,17 @@ namespace language_dictionary
             flyOutAbout.IsOpen = true;
         }
 
-        //Speak Btn click
-        private void btnSpeak_Click(object sender, RoutedEventArgs e)
+        //Read Btn click
+        private void btnRead_Click(object sender, RoutedEventArgs e)
         {
             speechController.SpeakAsync(lblTranslatedWord.Content.ToString());
-
         }
 
-
-
-   
-
+        //Showing On-Screen keyboard
+        private void btnShowKeyboard_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("osk.exe");
+        }
 
     }
 }

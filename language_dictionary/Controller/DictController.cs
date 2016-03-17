@@ -11,8 +11,10 @@ using System.Xml.Linq;
 
 namespace language_dictionary.Controller
 {
-    class DictController
+   public class DictController
     {
+
+        
         private const int maxNumOfRecentlyTranslated = 10;
         private Languages availLangs = new Languages();
         private HashSet<Word> allWords = new HashSet<Word>();

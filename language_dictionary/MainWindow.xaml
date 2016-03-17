@@ -1,8 +1,12 @@
 ﻿<!--Main Window-->
-<Controls:MetroWindow x:Class="language_dictionary.MainWindow"
+<Controls:MetroWindow x:Name="mainWindow" x:Class="language_dictionary.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:control = "clr-namespace:language_dictionary" 
+                      
+                     
+                      
         Title="Simply Translate!" 
         Height="366.418" 
         Width="551.866" 
@@ -26,8 +30,9 @@
     <!--Fly Out Control-->
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top">
-            <Controls:Flyout x:Name="flyOut" Header="Settings"  Width="200" IsModal="True" Theme="Accent" Height="150" Position="Right" >
-                <TextBlock FontSize="24">Hello World</TextBlock>
+            <Controls:Flyout x:Name="flyOutSettings" Header="Settings"  Width="200" IsModal="True" Theme="Accent" Height="150" Position="Right" VerticalAlignment="Top" >
+               <!--SettingsUserControl-->
+                <control:SettingsUserControl x:Name="userControlSettings"/>
             </Controls:Flyout>
 
             <Controls:Flyout x:Name="flyOutAbout" Header="Settings"  Width="200" IsModal="True" Theme="Accent" Height="150" Position="Left" >
@@ -94,8 +99,11 @@
                     <TextBox Controls:TextBoxHelper.Watermark="Enter word here" Controls:TextBoxHelper.ClearTextButton="True" x:Name="txtBoxWordToTranslate" HorizontalAlignment="Left" Height="56" Margin="10,176,0,0" TextWrapping="Wrap"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="191" FontSize="18"/>
                     <!--Translated word label-->
                     <Label x:Name="lblTranslatedWord" BorderThickness="1" BorderBrush="DeepSkyBlue" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="345,176,0,0" VerticalAlignment="Top" Width="193" Height="56" FontSize="18" />
+                    <!--Read button-->
+                    <Button x:Name="btnRead" Content="{DynamicResource appbar_speakerphone}"  HorizontalAlignment="Center" Margin="490,237,10,13" VerticalAlignment="Center"  Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Click="btnRead_Click" IsEnabled="False" ToolTip="Speak translated word (Only English available)"  />
+
                     <!--Speak button-->
-                    <Button x:Name="btnSpeak" Content="{DynamicResource appbar_speakerphone}"  HorizontalAlignment="Center" Margin="500,237,0,13" VerticalAlignment="Center"  Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Click="btnSpeak_Click" IsEnabled="False"  />
+                    <Button x:Name="btnShowKeyboard" Content="{DynamicResource appbar_input_keyboard}"  HorizontalAlignment="Center" Margin="10,237,490,13" VerticalAlignment="Center"  Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Click="btnShowKeyboard_Click" ToolTip="Open On-Screen keyboard"  />
 
 
                     <!--Translate button-->

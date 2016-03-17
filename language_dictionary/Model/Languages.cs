@@ -5,7 +5,7 @@ using System.Text;
 
 namespace language_dictionary.Model
 {
-    class Languages
+    public class Languages
     {
         //Map language(value) to descriptor(key) ex:(en:English) (de:Deutsch) (bg:Български)
         private Dictionary<String, String> allLangs = new Dictionary<string, string>();

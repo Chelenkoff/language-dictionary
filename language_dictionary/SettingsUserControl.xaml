@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="language_dictionary.SettingsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:control = "clr-namespace:language_dictionary" 
+             mc:Ignorable="d" Height="57.195" VerticalAlignment="Top" Width="203.333">
+    <Grid Margin="0,0,0,-42">
+
+        <Grid.Resources>
+            <Controls:MetroWindow x:Key="control"></Controls:MetroWindow>
+        </Grid.Resources>
+        <Button x:Name="btnLoadNewData" Content="Open new data file" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" Width="183" Click="btnLoadNewData_Click" FontSize="15"/>
+
+    </Grid>
+</UserControl>
