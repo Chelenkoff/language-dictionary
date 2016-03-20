@@ -87,10 +87,17 @@
     </ApplicationDefinition>
     <Compile Include="Model\Languages.cs" />
     <Compile Include="Model\Word.cs" />
-    <Compile Include="Views\SettingsUserControl.xaml.cs">
-      <DependentUpon>SettingsUserControl.xaml</DependentUpon>
+    <Compile Include="Views\AboutUC.xaml.cs">
+      <DependentUpon>AboutUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsUC.xaml.cs">
+      <DependentUpon>SettingsUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\XMLParserLINQ.cs" />
+    <Page Include="Views\AboutUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,7 +115,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SettingsUserControl.xaml">
+    <Page Include="Views\SettingsUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,6 +154,9 @@
     <Content Include="Resources\data.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Images\github_logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\app_logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

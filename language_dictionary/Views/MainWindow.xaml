@@ -12,7 +12,7 @@
         Width="551.866" 
         ResizeMode="CanMinimize"     
         GlowBrush="{DynamicResource AccentColorBrush}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" VerticalAlignment="Top">
 
 
 
@@ -29,17 +29,18 @@
 
     <!--Fly Out Control-->
     <Controls:MetroWindow.Flyouts>
-        <Controls:FlyoutsControl RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top">
-            <Controls:Flyout x:Name="flyOutSettings" Header="Settings"  Width="200" IsModal="True" Theme="Accent" Height="150" Position="Right" VerticalAlignment="Top" >
+        <Controls:FlyoutsControl VerticalAlignment="Top" >
+            <Controls:Flyout x:Name="flyOutSettings" Header="Settings"   IsModal="True" Theme="Accent"  Position="Right" VerticalAlignment="Top"  VerticalContentAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right">
                <!--SettingsUserControl-->
-                <control:SettingsUserControl x:Name="userControlSettings"/>
-            </Controls:Flyout>
-
-            <Controls:Flyout x:Name="flyOutAbout" Header="Settings"  Width="200" IsModal="True" Theme="Accent" Height="150" Position="Left" >
-                <TextBlock FontSize="24">Hello World</TextBlock>
+                <control:SettingsUC x:Name="userControlSettings" />
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
+
+
+
+
+
 
 
 
@@ -156,6 +157,14 @@
                     <Label x:Name="lblInfo" Content="10 Most recently translated words" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF60C3ED"/>
                 </Grid>
             </Controls:MetroTabItem>
+
+            <!--About tab item-->
+            <Controls:MetroTabItem x:Name="tabItemAbout"  Header="About" Visibility="Hidden">
+                <Grid>
+                    <control:AboutUC x:Name="userControlAbout" />
+                </Grid>
+            </Controls:MetroTabItem>
+
 
         </TabControl>
 

@@ -30,9 +30,24 @@ namespace language_dictionary
     public partial class MainWindow 
     {
         //Controller declaration
-        DictController dictController ;
+        private DictController dictController ;
         //Speech synthesizer declaration
         private SpeechSynthesizer speechController;
+
+
+
+        //'Controller' property definition
+        public DictController Controller
+        {
+            get
+            {
+                return dictController;
+            }
+            set
+            {
+                dictController = value;
+            }
+        }
 
         
         //MainWindow Constructor
@@ -42,7 +57,8 @@ namespace language_dictionary
             InitializeComponent();
             
             //Controller init
-            dictController = new DictController(".\\Resources\\data.xml");
+            Controller = new DictController(".\\Resources\\data.xml");
+
 
             //Speech synthesizer init
             speechController = new SpeechSynthesizer();
@@ -57,12 +73,11 @@ namespace language_dictionary
         //Reinstantiating default controller
         public void reinstantiateController(string url)
         {
-            dictController = new DictController(url);
+            Controller = new DictController(url);
             defaultPopulateToAndFromComboBoxes();
             this.ShowMessageAsync(String.Format("File \"{0}\" imported", url), "You can now use the new word set");
 
         }
-  
 
         //BTN Parse Word
         private void btnTranslate_Click(object sender, RoutedEventArgs e)
@@ -72,7 +87,8 @@ namespace language_dictionary
             //Emptying translated label
             lblTranslatedWord.Content = "";
 
-            string translatedWord = dictController.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
+            string translatedWord = Controller.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
+
             switch (translatedWord)
             {
                 case "NOT_FOUND":
@@ -84,9 +100,9 @@ namespace language_dictionary
                     break;
                 default:
                     //Word found and translated
-                    lblTranslatedWord.Content = dictController.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
-                    dictController.addToRecentlyTranslated(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString(), DateTime.Now);
-                    //Enabling 'Speak' button for english
+                     lblTranslatedWord.Content = Controller.translateNewWord(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString());
+                     Controller.addToRecentlyTranslated(txtBoxWordToTranslate.Text, splitBtnLangFrom.SelectedItem.ToString(), splitBtnLangTo.SelectedItem.ToString(), DateTime.Now);
+                     //Enabling 'Speak' button for english
                     if (splitBtnLangTo.SelectedItem.Equals("English"))
                         btnRead.IsEnabled = true;
                     break;
@@ -101,7 +117,8 @@ namespace language_dictionary
             splitBtnLangFrom.ClearValue(ItemsControl.ItemsSourceProperty);
             splitBtnLangTo.ClearValue(ItemsControl.ItemsSourceProperty);
 
-            splitBtnLangFrom.ItemsSource = dictController.getLanguagesObject().getAllLangsNames();
+            splitBtnLangFrom.ItemsSource = Controller.getLanguagesObject().getAllLangsNames();
+
             splitBtnLangTo.ItemsSource = splitBtnLangFrom.ItemsSource;
 
             splitBtnLangFrom.SelectedIndex = 0;
@@ -179,16 +196,13 @@ namespace language_dictionary
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             //Show flyout control
-
-            userControlSettings = new SettingsUserControl();
-
             flyOutSettings.IsOpen = true;
         }
 
         //About button
         private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
-            flyOutAbout.IsOpen = true;
+            tabItemAbout.IsSelected = true;
         }
 
         //Read Btn click

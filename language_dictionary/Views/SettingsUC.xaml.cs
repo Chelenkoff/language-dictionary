@@ -21,11 +21,14 @@ namespace language_dictionary
     /// <summary>
     /// Interaction logic for SettingsGrid.xaml
     /// </summary>
-    public partial class SettingsUserControl : UserControl
+    /// 
+    public partial class SettingsUC : UserControl
     {
+        //ParentWindow - used for reinstantiation of main controller
+        MainWindow parentWindow;
 
         //SettingsUserControl constructor
-        public SettingsUserControl()
+        public SettingsUC()
         {
             InitializeComponent();
         }
@@ -46,8 +49,6 @@ namespace language_dictionary
             // Create OpenFileDialog 
             OpenFileDialog dlg = new OpenFileDialog();
 
-
-
             //Set filter for file extension and default file extension 
             dlg.DefaultExt = "xml";
             dlg.Filter = "XML Files (*.xml)|*.xml";
@@ -66,9 +67,16 @@ namespace language_dictionary
             }
             else
                 return;
-
-            MainWindow parentWindow = (MainWindow)Window.GetWindow(this);
+ 
             parentWindow.reinstantiateController(filePath);
+            
         }
+
+        //Initializing parent window after UC loaded
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            parentWindow = (MainWindow)Window.GetWindow(this);
+        }
+
     }
 }
