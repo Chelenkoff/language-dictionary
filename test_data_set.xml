@@ -1,0 +1,28 @@
+<dict_data>
+	<languages>
+		<language>
+			<name>English</name>
+			<descriptor>en</descriptor>
+		</language>
+		<language>
+			<name>Bulgarian</name>
+			<descriptor>bg</descriptor>
+		</language>
+		<language>
+			<name>Deutsch</name>
+			<descriptor>de</descriptor>
+		</language>
+		<language>
+			<name>Le Français</name>
+			<descriptor>fr</descriptor>
+		</language>
+	</languages>
+	<words>
+		<word>
+			<en>computer</en>
+			<bg>компютър</bg>
+			<de>der computer</de>
+			<fr>les ordinateur</fr>
+		</word>
+	</words>
+</dict_data>
